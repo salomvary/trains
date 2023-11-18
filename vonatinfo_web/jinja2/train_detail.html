@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+        <tr>
+            {% for header in headers %}
+                <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for stop in train_schedule %}
+            <tr>
+                {% for column in stop %}
+                    <td>{{ column|default('', true) }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

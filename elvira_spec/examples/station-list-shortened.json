@@ -1,0 +1,64 @@
+[
+  {
+    "id": 7666,
+    "isAlias": true,
+    "name": "Bp (BUDAPEST*)",
+    "code": "005510009",
+    "baseCode": "3638",
+    "isInternational": false,
+    "canUseForOfferRequest": true,
+    "canUseForPessengerInformation": false,
+    "country": "Magyarország",
+    "coutryIso": "HU",
+    "modalities": [
+      {
+        "code": 100,
+        "name": null,
+        "description": null,
+        "order": 0,
+        "isDefault": false,
+        "defaultColor": "#1C4281",
+        "inkColor": "#FEFEFE",
+        "sign": {
+          "fontName": "/MAVI.MAVSTART.JE.Common;component/Resources/#MNR2007",
+          "character": "ȧ"
+        },
+        "foreignNames": null,
+        "foreignDescriptions": null
+      }
+    ],
+    "nameWithoutComma": "",
+    "isIn108_1": true
+  },
+  {
+    "id": 257,
+    "isAlias": false,
+    "name": "BUDAPEST*",
+    "code": "005510009",
+    "baseCode": "3638",
+    "isInternational": false,
+    "canUseForOfferRequest": true,
+    "canUseForPessengerInformation": false,
+    "country": "Magyarország",
+    "coutryIso": "HU",
+    "modalities": [
+      {
+        "code": 100,
+        "name": null,
+        "description": null,
+        "order": 0,
+        "isDefault": false,
+        "defaultColor": "#1C4281",
+        "inkColor": "#FEFEFE",
+        "sign": {
+          "fontName": "/MAVI.MAVSTART.JE.Common;component/Resources/#MNR2007",
+          "character": "ȧ"
+        },
+        "foreignNames": null,
+        "foreignDescriptions": null
+      }
+    ],
+    "nameWithoutComma": "BUDAPEST*",
+    "isIn108_1": true
+  }
+]

@@ -1,0 +1,779 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "MÁV ELVIRA API",
+    "description": "Unofficial API for MÁV ELVIRA - Hungarian Railways (jegy.mav.hu)",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://jegy-a.mav.hu"
+    }
+  ],
+  "paths": {
+    "/IK_API_PROD/api/OfferRequestApi/GetStationList": {
+      "post": {
+        "operationId": "GetStationList",
+        "parameters": [
+          {
+            "name": "content-length",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Station"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/IK_API_PROD/api/InformationApi/GetTimetable": {
+      "post": {
+        "operationId": "GetTimetable",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TimetableRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TimetableResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Scheduler": {
+        "type": "object",
+        "properties": {
+          "aggregatedServiceIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "seatReservationCode": {
+            "type": "string",
+            "format": "integer"
+          },
+          "code": {
+            "type": "string",
+            "format": "integer"
+          },
+          "companyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "route": {
+            "type": "string",
+            "nullable": true
+          },
+          "startStationReservationCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "endStationReservationCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "startStation": {
+            "$ref": "#/components/schemas/Station"
+          },
+          "endStation": {
+            "$ref": "#/components/schemas/Station"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "origStartStation": {
+            "type": "string",
+            "nullable": true
+          },
+          "origEndStation": {
+            "type": "string",
+            "nullable": true
+          },
+          "start": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "virtualStart": {
+            "type": "boolean"
+          },
+          "arrive": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "modality": {
+            "$ref": "#/components/schemas/Modality"
+          },
+          "virtualArrive": {
+            "type": "boolean"
+          },
+          "distance": {
+            "type": "number"
+          },
+          "closedTrackWay": {
+            "type": "boolean"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "kinds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Kind"
+            }
+          },
+          "kindsToDisplay": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Kind"
+            }
+          },
+          "kind": {
+            "$ref": "#/components/schemas/Kind"
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Service"
+            }
+          },
+          "actualOrEstimatedStart": {
+            "type": "string",
+            "nullable": true
+          },
+          "actualOrEstimatedArrive": {
+            "type": "string",
+            "nullable": true
+          },
+          "havarianInfok": {
+            "$ref": "#/components/schemas/HavarianInfok"
+          },
+          "directTrains": {
+            "type": "string",
+            "nullable": true
+          },
+          "carrierTrains": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTrack": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTrackType": {
+            "type": "string",
+            "nullable": true
+          },
+          "endTrack": {
+            "type": "string",
+            "nullable": true
+          },
+          "endTrackType": {
+            "type": "string",
+            "nullable": true
+          },
+          "jeEszkozAlapId": {
+            "type": "number"
+          },
+          "fullType": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullShortType": {
+            "type": "string"
+          },
+          "footer": {
+            "type": "string",
+            "nullable": true
+          },
+          "viszonylatiJel": {
+            "type": "object",
+            "properties": {
+              "piktogramFullName": {
+                "type": "string",
+                "nullable": true
+              },
+              "fontSzinKod": {
+                "type": "string"
+              },
+              "hatterSzinKod": {
+                "type": "string"
+              },
+              "sign": {
+                "type": "object",
+                "properties": {
+                  "fontName": {
+                    "type": "string"
+                  },
+                  "character": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "character",
+                  "fontName"
+                ],
+                "title": "Sign"
+              },
+              "jel": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "fontSzinKod",
+              "hatterSzinKod",
+              "jel",
+              "piktogramFullName",
+              "sign"
+            ],
+            "title": "ViszonylatiJel",
+            "nullable": true
+          },
+          "viszonylatObject": {
+            "$ref": "#/components/schemas/ViszonylatObject"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sameCar": {
+            "type": "boolean"
+          },
+          "startTimeZone": {
+            "type": "string",
+            "example": "KözEI",
+            "nullable": true
+          },
+          "arriveTimeZone": {
+            "type": "string",
+            "example": "KözEI",
+            "nullable": true
+          },
+          "trainId": {
+            "type": "string",
+            "format": "integer"
+          }
+        },
+        "required": [
+          "actualOrEstimatedArrive",
+          "actualOrEstimatedStart",
+          "aggregatedServiceIds",
+          "arrive",
+          "arriveTimeZone",
+          "carrierTrains",
+          "closedTrackWay",
+          "code",
+          "companyCode",
+          "description",
+          "directTrains",
+          "distance",
+          "endStation",
+          "endStationReservationCode",
+          "endTrack",
+          "endTrackType",
+          "footer",
+          "fullName",
+          "fullNameAndPiktogram",
+          "fullNameAndType",
+          "fullShortType",
+          "fullType",
+          "havarianInfok",
+          "jeEszkozAlapId",
+          "kind",
+          "kinds",
+          "kindsToDisplay",
+          "modality",
+          "name",
+          "origEndStation",
+          "origStartStation",
+          "route",
+          "sameCar",
+          "seatReservationCode",
+          "services",
+          "start",
+          "startDate",
+          "startStation",
+          "startStationReservationCode",
+          "startTimeZone",
+          "startTrack",
+          "startTrackType",
+          "trainId",
+          "virtualArrive",
+          "virtualStart",
+          "viszonylatObject",
+          "viszonylatiJel"
+        ],
+        "title": "Scheduler"
+      },
+      "TimetableRequest": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "StationInfo"
+            ]
+          },
+          "travelDate": {
+            "type": "string",
+            "example": "2023-10-27T22:00:00.000Z"
+          },
+          "stationNumberCode": {
+            "type": "string",
+            "example": "005510470"
+          },
+          "minCount": {
+            "type": "string",
+            "example": "0"
+          },
+          "maxCount": {
+            "type": "string",
+            "example": "9999999"
+          }
+        },
+        "required": [
+          "type",
+          "travelDate",
+          "stationNumberCode",
+          "minCount",
+          "maxCount"
+        ]
+      },
+      "TimetableResponse": {
+        "type": "object",
+        "properties": {
+          "trainSchedulerDetails": {
+            "type": "string",
+            "nullable": true
+          },
+          "stationSchedulerDetails": {
+            "$ref": "#/components/schemas/StationSchedulerDetails"
+          },
+          "routeSchedulerDetails": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "routeSchedulerDetails",
+          "stationSchedulerDetails",
+          "trainSchedulerDetails"
+        ]
+      },
+      "StationSchedulerDetails": {
+        "type": "object",
+        "properties": {
+          "station": {
+            "$ref": "#/components/schemas/Station"
+          },
+          "arrivalScheduler": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scheduler"
+            }
+          },
+          "departureScheduler": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scheduler"
+            }
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Service"
+            }
+          },
+          "moreResult": {
+            "type": "boolean"
+          },
+          "havariaInfos": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        },
+        "required": [
+          "arrivalScheduler",
+          "departureScheduler",
+          "havariaInfos",
+          "moreResult",
+          "services",
+          "station"
+        ]
+      },
+      "Modality": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number"
+          },
+          "name": {},
+          "description": {},
+          "order": {
+            "type": "number"
+          },
+          "isDefault": {
+            "type": "boolean"
+          },
+          "defaultColor": {
+            "type": "string"
+          },
+          "inkColor": {
+            "type": "string"
+          },
+          "sign": {
+            "type": "object",
+            "properties": {
+              "fontName": {
+                "type": "string"
+              },
+              "character": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "fontName",
+              "character"
+            ]
+          },
+          "foreignNames": {},
+          "foreignDescriptions": {}
+        },
+        "required": [
+          "code",
+          "name",
+          "description",
+          "order",
+          "isDefault",
+          "defaultColor",
+          "inkColor",
+          "sign",
+          "foreignNames",
+          "foreignDescriptions"
+        ]
+      },
+      "Station": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "isAlias": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "baseCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isInternational": {
+            "type": "boolean"
+          },
+          "canUseForOfferRequest": {
+            "type": "boolean"
+          },
+          "canUseForPassengerInformation": {
+            "type": "boolean"
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "coutryIso": {
+            "type": "string",
+            "nullable": true
+          },
+          "modalities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Modality"
+            }
+          },
+          "nameWithoutComma": {
+            "type": "string"
+          },
+          "isIn108_1": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "isAlias",
+          "name",
+          "code",
+          "baseCode",
+          "isInternational",
+          "canUseForOfferRequest",
+          "canUseForPessengerInformation",
+          "country",
+          "coutryIso",
+          "nameWithoutComma",
+          "isIn108_1"
+        ]
+      },
+      "Service": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "listOrder": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string"
+          },
+          "restrictiveStartStationCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "restrictiveEndStationCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "sign": {
+            "$ref": "#/components/schemas/Sign"
+          },
+          "trainStopKind": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "code",
+          "description",
+          "listOrder",
+          "restrictiveEndStationCode",
+          "restrictiveStartStationCode",
+          "sign",
+          "trainStopKind"
+        ],
+        "title": "Service"
+      },
+      "Sign": {
+        "type": "object",
+        "properties": {
+          "fontName": {
+            "type": "string"
+          },
+          "character": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "character",
+          "fontName"
+        ],
+        "title": "Sign"
+      },
+      "Kind": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "személyvonat"
+          },
+          "sortName": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "format": "integer"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "backgroundColorCode": {
+            "type": "string",
+            "example": "FFFFFF"
+          },
+          "foregroundColorCode": {
+            "type": "string",
+            "example": "FFFFFF"
+          },
+          "sign": {
+            "$ref": "#/components/schemas/Sign"
+          },
+          "startStation": {
+            "$ref": "#/components/schemas/Station"
+          },
+          "endStation": {
+            "$ref": "#/components/schemas/Station"
+          }
+        },
+        "required": [
+          "backgroundColorCode",
+          "code",
+          "endStation",
+          "foregroundColorCode",
+          "name",
+          "priority",
+          "sign",
+          "sortName",
+          "startStation"
+        ],
+        "title": "Kind"
+      },
+      "HavarianInfok": {
+        "type": "object",
+        "properties": {
+          "aktualisKeses": {
+            "type": "number",
+            "description": "Delay in minutes"
+          },
+          "kesesiOk": {
+            "type": "string",
+            "nullable": true,
+            "description": "Delay reason",
+            "example": "Társvasúttól átvett késés"
+          },
+          "havariaInfo": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "uzletiInfo": {
+            "type": "string",
+            "nullable": true
+          },
+          "kesesInfo": {
+            "type": "string",
+            "description": "Delay description",
+            "example": "17 perc késés: Társvasúttól átvett késés"
+          }
+        },
+        "required": [
+          "aktualisKeses",
+          "havariaInfo",
+          "kesesInfo",
+          "kesesiOk",
+          "uzletiInfo"
+        ],
+        "title": "HavarianInfok"
+      },
+      "ViszonylatObject": {
+        "type": "object",
+        "properties": {
+          "startStationCode": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startTimeZone": {
+            "$ref": "#/components/schemas/TimeZone"
+          },
+          "endStationCode": {
+            "type": "string"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTimeZone": {
+            "$ref": "#/components/schemas/TimeZone"
+          },
+          "travelTime": {
+            "type": "number"
+          },
+          "startTrack": {
+            "type": "string",
+            "nullable": true
+          },
+          "endTrack": {
+            "type": "string",
+            "nullable": true
+          },
+          "innerStationCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "endStationCode",
+          "endTime",
+          "endTimeZone",
+          "endTrack",
+          "innerStationCodes",
+          "startStationCode",
+          "startTime",
+          "startTimeZone",
+          "startTrack",
+          "travelTime"
+        ],
+        "title": "ViszonylatObject"
+      },
+      "TimeZone": {
+        "type": "string",
+        "example": "KözEI"
+      }
+    }
+  }
+}

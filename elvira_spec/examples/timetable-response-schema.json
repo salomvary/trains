@@ -1,0 +1,839 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Welcome7",
+    "definitions": {
+        "Welcome7": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "trainSchedulerDetails": {
+                    "type": "null"
+                },
+                "stationSchedulerDetails": {
+                    "$ref": "#/definitions/StationSchedulerDetails"
+                },
+                "routeSchedulerDetails": {
+                    "type": "null"
+                }
+            },
+            "required": [
+                "routeSchedulerDetails",
+                "stationSchedulerDetails",
+                "trainSchedulerDetails"
+            ],
+            "title": "Welcome7"
+        },
+        "StationSchedulerDetails": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "station": {
+                    "$ref": "#/definitions/Station"
+                },
+                "arrivalScheduler": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Scheduler"
+                    }
+                },
+                "departureScheduler": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Scheduler"
+                    }
+                },
+                "services": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Service"
+                    }
+                },
+                "moreResult": {
+                    "type": "boolean"
+                },
+                "havariaInfos": {
+                    "type": "array",
+                    "items": {}
+                }
+            },
+            "required": [
+                "arrivalScheduler",
+                "departureScheduler",
+                "havariaInfos",
+                "moreResult",
+                "services",
+                "station"
+            ],
+            "title": "StationSchedulerDetails"
+        },
+        "Scheduler": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "aggregatedServiceIds": {
+                    "type": "array",
+                    "items": {}
+                },
+                "name": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ArrivalSchedulerName"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "seatReservationCode": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "code": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "companyCode": {
+                    "type": "null"
+                },
+                "route": {
+                    "type": "null"
+                },
+                "startStationReservationCode": {
+                    "type": "null"
+                },
+                "endStationReservationCode": {
+                    "type": "null"
+                },
+                "startStation": {
+                    "$ref": "#/definitions/Station"
+                },
+                "endStation": {
+                    "$ref": "#/definitions/Station"
+                },
+                "startDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "origStartStation": {
+                    "type": "null"
+                },
+                "origEndStation": {
+                    "type": "null"
+                },
+                "start": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "virtualStart": {
+                    "type": "boolean"
+                },
+                "arrive": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "modality": {
+                    "$ref": "#/definitions/Modality"
+                },
+                "virtualArrive": {
+                    "type": "boolean"
+                },
+                "distance": {
+                    "type": "integer"
+                },
+                "closedTrackWay": {
+                    "type": "boolean"
+                },
+                "fullName": {
+                    "type": "string"
+                },
+                "fullNameAndType": {
+                    "type": "string"
+                },
+                "kinds": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Kind"
+                    }
+                },
+                "kindsToDisplay": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Kind"
+                    }
+                },
+                "kind": {
+                    "$ref": "#/definitions/Kind"
+                },
+                "services": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Service"
+                    }
+                },
+                "actualOrEstimatedStart": {
+                    "type": "null"
+                },
+                "actualOrEstimatedArrive": {
+                    "type": "null"
+                },
+                "havarianInfok": {
+                    "$ref": "#/definitions/HavarianInfok"
+                },
+                "directTrains": {
+                    "type": "null"
+                },
+                "carrierTrains": {
+                    "type": "null"
+                },
+                "startTrack": {
+                    "type": "null"
+                },
+                "startTrackType": {
+                    "type": "null"
+                },
+                "endTrack": {
+                    "type": "null"
+                },
+                "endTrackType": {
+                    "type": "null"
+                },
+                "jeEszkozAlapId": {
+                    "type": "integer"
+                },
+                "fullType": {
+                    "$ref": "#/definitions/FullType"
+                },
+                "fullShortType": {
+                    "$ref": "#/definitions/FullShortType"
+                },
+                "fullNameAndPiktogram": {
+                    "$ref": "#/definitions/FullNameAndPiktogram"
+                },
+                "footer": {
+                    "type": "null"
+                },
+                "viszonylatiJel": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ViszonylatiJel"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "viszonylatObject": {
+                    "$ref": "#/definitions/ViszonylatObject"
+                },
+                "description": {
+                    "type": "null"
+                },
+                "sameCar": {
+                    "type": "boolean"
+                },
+                "startTimeZone": {
+                    "$ref": "#/definitions/TimeZone"
+                },
+                "arriveTimeZone": {
+                    "$ref": "#/definitions/TimeZone"
+                },
+                "trainId": {
+                    "type": "string",
+                    "format": "integer"
+                }
+            },
+            "required": [
+                "actualOrEstimatedArrive",
+                "actualOrEstimatedStart",
+                "aggregatedServiceIds",
+                "arrive",
+                "arriveTimeZone",
+                "carrierTrains",
+                "closedTrackWay",
+                "code",
+                "companyCode",
+                "description",
+                "directTrains",
+                "distance",
+                "endStation",
+                "endStationReservationCode",
+                "endTrack",
+                "endTrackType",
+                "footer",
+                "fullName",
+                "fullNameAndPiktogram",
+                "fullNameAndType",
+                "fullShortType",
+                "fullType",
+                "havarianInfok",
+                "jeEszkozAlapId",
+                "kind",
+                "kinds",
+                "kindsToDisplay",
+                "modality",
+                "name",
+                "origEndStation",
+                "origStartStation",
+                "route",
+                "sameCar",
+                "seatReservationCode",
+                "services",
+                "start",
+                "startDate",
+                "startStation",
+                "startStationReservationCode",
+                "startTimeZone",
+                "startTrack",
+                "startTrackType",
+                "trainId",
+                "virtualArrive",
+                "virtualStart",
+                "viszonylatObject",
+                "viszonylatiJel"
+            ],
+            "title": "Scheduler"
+        },
+        "Station": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "isAlias": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "$ref": "#/definitions/NameWithoutCommaEnum"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "baseCode": {
+                    "anyOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "isInternational": {
+                    "type": "boolean"
+                },
+                "canUseForOfferRequest": {
+                    "type": "boolean"
+                },
+                "canUseForPessengerInformation": {
+                    "type": "boolean"
+                },
+                "country": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Country"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "coutryIso": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/CoutryISO"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "modalities": {
+                    "anyOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Modality"
+                            }
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "nameWithoutComma": {
+                    "$ref": "#/definitions/NameWithoutCommaEnum"
+                },
+                "isIn108_1": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "baseCode",
+                "canUseForOfferRequest",
+                "canUseForPessengerInformation",
+                "code",
+                "country",
+                "coutryIso",
+                "id",
+                "isAlias",
+                "isIn108_1",
+                "isInternational",
+                "modalities",
+                "name",
+                "nameWithoutComma"
+            ],
+            "title": "Station"
+        },
+        "Modality": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "null"
+                },
+                "description": {
+                    "type": "null"
+                },
+                "order": {
+                    "type": "integer"
+                },
+                "isDefault": {
+                    "type": "boolean"
+                },
+                "defaultColor": {
+                    "$ref": "#/definitions/DefaultColor"
+                },
+                "inkColor": {
+                    "$ref": "#/definitions/InkColor"
+                },
+                "sign": {
+                    "$ref": "#/definitions/Sign"
+                },
+                "foreignNames": {
+                    "type": "null"
+                },
+                "foreignDescriptions": {
+                    "type": "null"
+                }
+            },
+            "required": [
+                "code",
+                "defaultColor",
+                "description",
+                "foreignDescriptions",
+                "foreignNames",
+                "inkColor",
+                "isDefault",
+                "name",
+                "order",
+                "sign"
+            ],
+            "title": "Modality"
+        },
+        "Sign": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "fontName": {
+                    "$ref": "#/definitions/FontName"
+                },
+                "character": {
+                    "$ref": "#/definitions/Character"
+                }
+            },
+            "required": [
+                "character",
+                "fontName"
+            ],
+            "title": "Sign"
+        },
+        "FullNameAndPiktogram": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "(Collection)": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "(Collection)"
+            ],
+            "title": "FullNameAndPiktogram"
+        },
+        "HavarianInfok": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "aktualisKeses": {
+                    "type": "integer"
+                },
+                "kesesiOk": {
+                    "type": "null"
+                },
+                "havariaInfo": {
+                    "type": "null"
+                },
+                "uzletiInfo": {
+                    "type": "null"
+                },
+                "kesesInfo": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "aktualisKeses",
+                "havariaInfo",
+                "kesesInfo",
+                "kesesiOk",
+                "uzletiInfo"
+            ],
+            "title": "HavarianInfok"
+        },
+        "Kind": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "$ref": "#/definitions/FullType"
+                },
+                "sortName": {
+                    "$ref": "#/definitions/FullShortType"
+                },
+                "code": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "backgroundColorCode": {
+                    "$ref": "#/definitions/BackgroundColorCode"
+                },
+                "foregroundColorCode": {
+                    "$ref": "#/definitions/ForegroundColorCode"
+                },
+                "sign": {
+                    "$ref": "#/definitions/Sign"
+                },
+                "startStation": {
+                    "$ref": "#/definitions/Station"
+                },
+                "endStation": {
+                    "$ref": "#/definitions/Station"
+                }
+            },
+            "required": [
+                "backgroundColorCode",
+                "code",
+                "endStation",
+                "foregroundColorCode",
+                "name",
+                "priority",
+                "sign",
+                "sortName",
+                "startStation"
+            ],
+            "title": "Kind"
+        },
+        "Service": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "type": "null"
+                },
+                "listOrder": {
+                    "type": "null"
+                },
+                "description": {
+                    "$ref": "#/definitions/Description"
+                },
+                "restrictiveStartStationCode": {
+                    "type": "null"
+                },
+                "restrictiveEndStationCode": {
+                    "type": "null"
+                },
+                "sign": {
+                    "$ref": "#/definitions/Sign"
+                },
+                "trainStopKind": {
+                    "type": "null"
+                }
+            },
+            "required": [
+                "code",
+                "description",
+                "listOrder",
+                "restrictiveEndStationCode",
+                "restrictiveStartStationCode",
+                "sign",
+                "trainStopKind"
+            ],
+            "title": "Service"
+        },
+        "ViszonylatObject": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "startStationCode": {
+                    "type": "string"
+                },
+                "startTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "startTimeZone": {
+                    "$ref": "#/definitions/TimeZone"
+                },
+                "endStationCode": {
+                    "type": "string"
+                },
+                "endTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "endTimeZone": {
+                    "$ref": "#/definitions/TimeZone"
+                },
+                "travelTime": {
+                    "type": "integer"
+                },
+                "startTrack": {
+                    "type": "null"
+                },
+                "endTrack": {
+                    "type": "null"
+                },
+                "innerStationCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "endStationCode",
+                "endTime",
+                "endTimeZone",
+                "endTrack",
+                "innerStationCodes",
+                "startStationCode",
+                "startTime",
+                "startTimeZone",
+                "startTrack",
+                "travelTime"
+            ],
+            "title": "ViszonylatObject"
+        },
+        "ViszonylatiJel": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "piktogramFullName": {
+                    "type": "null"
+                },
+                "fontSzinKod": {
+                    "$ref": "#/definitions/FontSzinKod"
+                },
+                "hatterSzinKod": {
+                    "$ref": "#/definitions/BackgroundColorCode"
+                },
+                "sign": {
+                    "$ref": "#/definitions/Sign"
+                },
+                "jel": {
+                    "$ref": "#/definitions/Jel"
+                }
+            },
+            "required": [
+                "fontSzinKod",
+                "hatterSzinKod",
+                "jel",
+                "piktogramFullName",
+                "sign"
+            ],
+            "title": "ViszonylatiJel"
+        },
+        "TimeZone": {
+            "type": "string",
+            "enum": [
+                "KözEI"
+            ],
+            "title": "TimeZone"
+        },
+        "Country": {
+            "type": "string",
+            "enum": [
+                "Magyarország",
+                "Csehország",
+                "Németország",
+                "Lengyelország"
+            ],
+            "title": "Country"
+        },
+        "CoutryISO": {
+            "type": "string",
+            "enum": [
+                "HU",
+                "CZ",
+                "DE",
+                "PL"
+            ],
+            "title": "CoutryISO"
+        },
+        "DefaultColor": {
+            "type": "string",
+            "enum": [
+                "#1C4281"
+            ],
+            "title": "DefaultColor"
+        },
+        "InkColor": {
+            "type": "string",
+            "enum": [
+                "#FEFEFE"
+            ],
+            "title": "InkColor"
+        },
+        "Character": {
+            "type": "string",
+            "enum": [
+                "ȧ",
+                "Ǥ",
+                "Ǔ",
+                "Þ",
+                "ß",
+                "ȭ",
+                "Õ",
+                "ő",
+                "ù",
+                "¨",
+                "Ý",
+                "ŋ",
+                "Ō",
+                "œ",
+                "Î",
+                "Ã",
+                "¿",
+                "Ó",
+                "Ŏ",
+                "ū",
+                "Ƃ",
+                "ƈ",
+                "ē"
+            ],
+            "title": "Character"
+        },
+        "FontName": {
+            "type": "string",
+            "enum": [
+                "/MAVI.MAVSTART.JE.Common;component/Resources/#MNR2007"
+            ],
+            "title": "FontName"
+        },
+        "NameWithoutCommaEnum": {
+            "type": "string",
+            "enum": [
+                "Szob",
+                "Budapest-Nyugati",
+                "Brno hl. n.",
+                "Hamburg-Altona",
+                "Terespol",
+                "Breclav",
+                "Dunakeszi",
+                "Nagymaros-Visegrád",
+                ""
+            ],
+            "title": "NameWithoutCommaEnum"
+        },
+        "FullShortType": {
+            "type": "string",
+            "enum": [
+                "BESZ",
+                "BEZ",
+                "BEG",
+                "EC"
+            ],
+            "title": "FullShortType"
+        },
+        "FullType": {
+            "type": "string",
+            "enum": [
+                "személyvonat",
+                "EuroCity"
+            ],
+            "title": "FullType"
+        },
+        "BackgroundColorCode": {
+            "type": "string",
+            "enum": [
+                "FFFFFF",
+                "FFCD28"
+            ],
+            "title": "BackgroundColorCode"
+        },
+        "ForegroundColorCode": {
+            "type": "string",
+            "enum": [
+                "000000",
+                "0000FF"
+            ],
+            "title": "ForegroundColorCode"
+        },
+        "ArrivalSchedulerName": {
+            "type": "string",
+            "enum": [
+                "METROPOLITAN",
+                "HUNGÁRIA",
+                "BÁTHORY"
+            ],
+            "title": "ArrivalSchedulerName"
+        },
+        "Description": {
+            "type": "string",
+            "enum": [
+                "A vonat 2. osztályú kocsikkal közlekedik",
+                "Kerekesszékes utazásra alkalmas kocsi emelőberendezéssel",
+                "Országbérlettel igénybe vehető",
+                "Kerékpárok a kijelölt helyen korlátozott számban szállíthatók",
+                "Elővárosi vonat",
+                "Budapest-bérlettel (BB) és csatlakozó jeggyel igénybe vehető",
+                "Csatlakozásra nem vár",
+                "A vonatban 1. osztályú kocsi is közlekedik",
+                "Kerekesszékes utazásra alkalmas kocsi emelőberendezés nélkül",
+                "Kerékpárhely foglalása kötelező",
+                "Országos vonat",
+                "Fogyatékkal élőknek fenntartott fülke vagy helyek",
+                "Helyjegy váltható.",
+                "Étkezőkocsi",
+                "közvetlen kocsi",
+                "Kerékpár nem szállítható",
+                "Időszakos jegykiadás korlátozás"
+            ],
+            "title": "Description"
+        },
+        "FontSzinKod": {
+            "type": "string",
+            "enum": [
+                "00AFF0",
+                "3C3C3C",
+                "AACD46"
+            ],
+            "title": "FontSzinKod"
+        },
+        "Jel": {
+            "type": "string",
+            "enum": [
+                "S70",
+                "Z70",
+                "G70"
+            ],
+            "title": "Jel"
+        }
+    }
+}

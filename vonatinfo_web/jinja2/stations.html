@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <table class="table">
+        <tbody>
+        {% for station in stations %}
+            <tr>
+                <td>
+                    <a href="{{ reverse('station_detail', args=[station|replace("/", "%2F")]) }}">
+                        {{ station }}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

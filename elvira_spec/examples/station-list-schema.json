@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "number"
+      },
+      "isAlias": {
+        "type": "boolean"
+      },
+      "name": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "baseCode": {
+        "type": "string"
+      },
+      "isInternational": {
+        "type": "boolean"
+      },
+      "canUseForOfferRequest": {
+        "type": "boolean"
+      },
+      "canUseForPessengerInformation": {
+        "type": "boolean"
+      },
+      "country": {
+        "type": "string"
+      },
+      "coutryIso": {
+        "type": "string"
+      },
+      "modalities": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "number"
+            },
+            "name": {},
+            "description": {},
+            "order": {
+              "type": "number"
+            },
+            "isDefault": {
+              "type": "boolean"
+            },
+            "defaultColor": {
+              "type": "string"
+            },
+            "inkColor": {
+              "type": "string"
+            },
+            "sign": {
+              "type": "object",
+              "properties": {
+                "fontName": {
+                  "type": "string"
+                },
+                "character": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fontName",
+                "character"
+              ]
+            },
+            "foreignNames": {},
+            "foreignDescriptions": {}
+          },
+          "required": [
+            "code",
+            "name",
+            "description",
+            "order",
+            "isDefault",
+            "defaultColor",
+            "inkColor",
+            "sign",
+            "foreignNames",
+            "foreignDescriptions"
+          ]
+        }
+      },
+      "nameWithoutComma": {
+        "type": "string"
+      },
+      "isIn108_1": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "id",
+      "isAlias",
+      "name",
+      "code",
+      "baseCode",
+      "isInternational",
+      "canUseForOfferRequest",
+      "canUseForPessengerInformation",
+      "country",
+      "coutryIso",
+      "nameWithoutComma",
+      "isIn108_1"
+    ]
+  }
+}

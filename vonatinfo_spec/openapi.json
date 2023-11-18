@@ -1,0 +1,485 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "MÁV API",
+    "description": "Unofficial API for MÁV - Hungarian Railways",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://vonatinfo.mav-start.hu/map.aspx"
+    }
+  ],
+  "paths": {
+    "/getData": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/TrainsRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TrainRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TrainScheduleRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/StationRequest"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "a"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/TrainsResult"
+                    },
+                    {
+                      "$ref": "#/components/schemas/TrainResult"
+                    },
+                    {
+                      "$ref": "#/components/schemas/TrainScheduleResult"
+                    },
+                    {
+                      "$ref": "#/components/schemas/StationResult"
+                    }
+                  ],
+                  "discriminator": {
+                    "propertyName": "d.action"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TrainsRequest": {
+        "type": "object",
+        "properties": {
+          "a": {
+            "type": "string",
+            "enum": [
+              "TRAINS"
+            ]
+          },
+          "jo": {
+            "type": "object",
+            "properties": {
+              "history": {
+                "type": "boolean"
+              },
+              "id": {
+                "type": "boolean"
+              },
+              "pre": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "required": [
+          "a",
+          "jo"
+        ]
+      },
+      "TrainRequest": {
+        "type": "object",
+        "properties": {
+          "a": {
+            "type": "string",
+            "enum": [
+              "TRAIN"
+            ]
+          },
+          "jo": {
+            "type": "object",
+            "properties": {
+              "v": {
+                "type": "string",
+                "example": "6852663_231026"
+              },
+              "vsz": {
+                "type": "string",
+                "example": "5532932"
+              },
+              "zoom": {
+                "type": "boolean"
+              },
+              "csakkozlekedovonat": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "v",
+              "vsz",
+              "zoom",
+              "csakkozlekedovonat"
+            ]
+          }
+        },
+        "required": [
+          "a",
+          "jo"
+        ]
+      },
+      "TrainScheduleRequestParam": {
+        "type": "object",
+        "properties": {
+          "v": {
+            "type": "string",
+            "example": "6852663_231026"
+          },
+          "d": {
+            "type": "string",
+            "description": "Date",
+            "example": "23.10.26"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "1"
+            ]
+          }
+        },
+        "required": [
+          "v"
+        ]
+      },
+      "TrainScheduleRequest": {
+        "type": "object",
+        "properties": {
+          "a": {
+            "type": "string",
+            "enum": [
+              "TRAIN"
+            ]
+          },
+          "jo": {
+            "$ref": "#/components/schemas/TrainScheduleRequestParam"
+          }
+        },
+        "required": [
+          "a",
+          "jo"
+        ]
+      },
+      "StationRequest": {
+        "type": "object",
+        "properties": {
+          "a": {
+            "type": "string",
+            "enum": [
+              "STATION"
+            ]
+          },
+          "jo": {
+            "type": "object",
+            "properties": {
+              "a": {
+                "type": "string",
+                "description": "Station name",
+                "example": "Nagymaros-Visegrád"
+              }
+            },
+            "required": [
+              "a"
+            ]
+          }
+        },
+        "required": [
+          "a",
+          "jo"
+        ]
+      },
+      "TrainsResult": {
+        "type": "object",
+        "properties": {
+          "d": {
+            "type": "object",
+            "properties": {
+              "__type": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              },
+              "param": {
+                "type": "object",
+                "properties": {
+                  "history": {
+                    "type": "boolean"
+                  },
+                  "id": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "history",
+                  "id"
+                ]
+              },
+              "result": {
+                "type": "object",
+                "properties": {
+                  "@PackageType": {
+                    "type": "string"
+                  },
+                  "@CreationTime": {
+                    "type": "string"
+                  },
+                  "Trains": {
+                    "type": "object",
+                    "properties": {
+                      "Train": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Train"
+                        }
+                      }
+                    },
+                    "required": [
+                      "Train"
+                    ]
+                  }
+                },
+                "required": [
+                  "@PackageType",
+                  "@CreationTime",
+                  "Trains"
+                ]
+              },
+              "time": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "__type",
+              "action",
+              "param",
+              "result",
+              "time"
+            ]
+          }
+        },
+        "required": [
+          "d"
+        ]
+      },
+      "TrainResult": {
+        "type": "object",
+        "properties": {
+          "d": {
+            "type": "object",
+            "properties": {
+              "__type": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              },
+              "param": {
+                "type": "object",
+                "properties": {
+                  "v": {
+                    "type": "string"
+                  },
+                  "vsz": {
+                    "type": "string"
+                  },
+                  "zoom": {
+                    "type": "boolean"
+                  },
+                  "csakkozlekedovonat": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "v",
+                  "vsz",
+                  "zoom",
+                  "csakkozlekedovonat"
+                ]
+              },
+              "result": {
+                "type": "object",
+                "properties": {
+                  "html": {
+                    "type": "string"
+                  },
+                  "line": {
+                    "type": "array",
+                    "items": {}
+                  }
+                },
+                "required": [
+                  "html",
+                  "line"
+                ]
+              },
+              "time": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "__type",
+              "action",
+              "param",
+              "result",
+              "time"
+            ]
+          }
+        },
+        "required": [
+          "d"
+        ]
+      },
+      "TrainScheduleResult": {
+        "type": "object",
+        "properties": {
+          "d": {
+            "type": "object",
+            "properties": {
+              "__type": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              },
+              "param": {
+                "$ref": "#/components/schemas/TrainScheduleRequestParam"
+              },
+              "result": {
+                "type": "object",
+                "properties": {
+                  "html": {
+                    "type": "string"
+                  },
+                  "line": {
+                    "type": "array",
+                    "items": {}
+                  }
+                },
+                "required": [
+                  "html",
+                  "line"
+                ]
+              },
+              "time": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "__type",
+              "action",
+              "param",
+              "result",
+              "time"
+            ]
+          }
+        },
+        "required": [
+          "d"
+        ]
+      },
+      "StationResult": {
+        "type": "object",
+        "properties": {
+          "d": {
+            "type": "object",
+            "properties": {
+              "__type": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              },
+              "param": {
+                "type": "object",
+                "properties": {
+                  "a": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "a"
+                ]
+              },
+              "result": {
+                "type": "string"
+              },
+              "time": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "__type",
+              "action",
+              "param",
+              "result",
+              "time"
+            ]
+          }
+        },
+        "required": [
+          "d"
+        ]
+      },
+      "Train": {
+        "type": "object",
+        "properties": {
+          "@Delay": {
+            "type": "number"
+          },
+          "@Lat": {
+            "type": "number"
+          },
+          "@Relation": {
+            "type": "string"
+          },
+          "@TrainNumber": {
+            "type": "string"
+          },
+          "@Menetvonal": {
+            "type": "string"
+          },
+          "@Line": {
+            "type": "string"
+          },
+          "@Lon": {
+            "type": "number"
+          },
+          "@ElviraID": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "@Lat",
+          "@Relation",
+          "@TrainNumber",
+          "@Menetvonal",
+          "@Lon",
+          "@ElviraID"
+        ]
+      }
+    }
+  }
+}

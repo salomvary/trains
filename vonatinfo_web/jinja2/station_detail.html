@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+        <tr>
+            {% for header in headers %}
+                <th>{{ header }}</th>
+            {% endfor %}
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for train in trains %}
+            <tr>
+                {% for column in train %}
+                    <td>{{ column|default('', true) }}</td>
+                {% endfor %}
+                <td>
+                    <a class="btn btn-primary"
+                       href="{{ reverse('train_detail', args=[train[8]]) }}">
+                        Details
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

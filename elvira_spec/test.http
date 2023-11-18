@@ -1,0 +1,21 @@
+### Get station list
+
+# @no-cookie-jar
+POST https://jegy-a.mav.hu/IK_API_PROD/api/OfferRequestApi/GetStationList
+
+
+### Get timetable for Nagymaros-Visegrád
+
+# @no-cookie-jar
+POST https://jegy-a.mav.hu/IK_API_PROD/api/InformationApi/GetTimetable
+Accept: application/json, text/plain, */*
+Language: en
+Content-Type: application/json; charset=utf-8
+
+{
+  "type": "StationInfo",
+  "travelDate": "2024-11-16T08:30:00.000Z",
+  "stationNumberCode": "005510470",
+  "minCount": "0",
+  "maxCount": "9999999"
+}
