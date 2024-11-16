@@ -15,6 +15,9 @@ Various tools and unofficial API clients and tools for MÁV - Hungarian Railways
 The generated clients are based on reverse engineering the APIs and manually creating OpenAPI
 specifications. See the `openapi.json` files in the respective directories.
 
+- [Open Vonatinfó API in Swagger Editor](https://editor-next.swagger.io/?url=https://raw.githubusercontent.com/salomvary/trains/refs/heads/main/vonatinfo_spec/openapi.json) 
+- [Open ELVIRA API in Swagger Editor](https://editor-next.swagger.io/?url=https://raw.githubusercontent.com/salomvary/trains/refs/heads/main/elvira_spec/openapi.json) 
+
 ## Usage
 
     python -m venv .venv
