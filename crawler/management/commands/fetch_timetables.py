@@ -13,7 +13,7 @@ class Command(BaseCommand):
     help = "Fetches and persists timetables"
 
     def add_arguments(self, parser):
-        parser.add_argument("--station-codes", nargs="+", type=str)
+        parser.add_argument("--station-codes", nargs="+", type=str, default=[])
 
     def handle(self, *args, **options):
         asyncio.run(fetch_timetables(options["station_codes"]))
