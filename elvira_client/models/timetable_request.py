@@ -27,8 +27,8 @@ class TimetableRequest(BaseModel):
     TimetableRequest
     """ # noqa: E501
     type: StrictStr
-    travel_date: StrictStr = Field(alias="travelDate")
-    station_number_code: StrictStr = Field(alias="stationNumberCode")
+    travel_date: StrictStr = Field(description="Might be up to 8 days in the past or several months in the future", alias="travelDate")
+    station_number_code: StrictStr = Field(description="Numeric station code, returned as `code` by the `GetStationList` operation", alias="stationNumberCode")
     min_count: StrictStr = Field(alias="minCount")
     max_count: StrictStr = Field(alias="maxCount")
     __properties: ClassVar[List[str]] = ["type", "travelDate", "stationNumberCode", "minCount", "maxCount"]

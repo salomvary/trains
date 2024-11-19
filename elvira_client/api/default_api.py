@@ -43,7 +43,6 @@ class DefaultApi:
     @validate_call
     async def get_station_list(
         self,
-        content_length: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -59,9 +58,8 @@ class DefaultApi:
     ) -> List[Station]:
         """get_station_list
 
+        Get list of available stations across all Europe. Warning: returns a very large response.
 
-        :param content_length: (required)
-        :type content_length: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -85,7 +83,6 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._get_station_list_serialize(
-            content_length=content_length,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -109,7 +106,6 @@ class DefaultApi:
     @validate_call
     async def get_station_list_with_http_info(
         self,
-        content_length: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -125,9 +121,8 @@ class DefaultApi:
     ) -> ApiResponse[List[Station]]:
         """get_station_list
 
+        Get list of available stations across all Europe. Warning: returns a very large response.
 
-        :param content_length: (required)
-        :type content_length: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -151,7 +146,6 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._get_station_list_serialize(
-            content_length=content_length,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -175,7 +169,6 @@ class DefaultApi:
     @validate_call
     async def get_station_list_without_preload_content(
         self,
-        content_length: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -191,9 +184,8 @@ class DefaultApi:
     ) -> RESTResponseType:
         """get_station_list
 
+        Get list of available stations across all Europe. Warning: returns a very large response.
 
-        :param content_length: (required)
-        :type content_length: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -217,7 +209,6 @@ class DefaultApi:
         """ # noqa: E501
 
         _param = self._get_station_list_serialize(
-            content_length=content_length,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -236,7 +227,6 @@ class DefaultApi:
 
     def _get_station_list_serialize(
         self,
-        content_length,
         _request_auth,
         _content_type,
         _headers,
@@ -258,8 +248,6 @@ class DefaultApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if content_length is not None:
-            _header_params['content-length'] = content_length
         # process the form parameters
         # process the body parameter
 
@@ -279,7 +267,7 @@ class DefaultApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/IK_API_PROD/api/OfferRequestApi/GetStationList',
+            resource_path='/OfferRequestApi/GetStationList',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -315,6 +303,7 @@ class DefaultApi:
     ) -> TimetableResponse:
         """get_timetable
 
+        Get arrivals and departures for a specific station
 
         :param language: (required)
         :type language: str
@@ -385,6 +374,7 @@ class DefaultApi:
     ) -> ApiResponse[TimetableResponse]:
         """get_timetable
 
+        Get arrivals and departures for a specific station
 
         :param language: (required)
         :type language: str
@@ -455,6 +445,7 @@ class DefaultApi:
     ) -> RESTResponseType:
         """get_timetable
 
+        Get arrivals and departures for a specific station
 
         :param language: (required)
         :type language: str
@@ -562,7 +553,7 @@ class DefaultApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/IK_API_PROD/api/InformationApi/GetTimetable',
+            resource_path='/InformationApi/GetTimetable',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

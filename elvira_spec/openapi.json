@@ -7,24 +7,14 @@
   },
   "servers": [
     {
-      "url": "https://jegy-a.mav.hu"
+      "url": "https://jegy-a.mav.hu/IK_API_PROD/api"
     }
   ],
   "paths": {
-    "/IK_API_PROD/api/OfferRequestApi/GetStationList": {
+    "/OfferRequestApi/GetStationList": {
       "post": {
+        "description": "Get list of available stations across all Europe. Warning: returns a very large response.",
         "operationId": "GetStationList",
-        "parameters": [
-          {
-            "name": "content-length",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "0"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -42,9 +32,10 @@
         }
       }
     },
-    "/IK_API_PROD/api/InformationApi/GetTimetable": {
+    "/InformationApi/GetTimetable": {
       "post": {
         "operationId": "GetTimetable",
+        "description": "Get arrivals and departures for a specific station",
         "parameters": [
           {
             "name": "language",
@@ -367,10 +358,12 @@
           },
           "travelDate": {
             "type": "string",
-            "example": "2023-10-27T22:00:00.000Z"
+            "description": "Specify day and time to return timetable after, might be up to 8 days in the past or several months in the future",
+            "example": "2024-11-19T00:00:00.000Z"
           },
           "stationNumberCode": {
             "type": "string",
+            "description": "Numeric station code, returned as `code` by the `GetStationList` operation",
             "example": "005510470"
           },
           "minCount": {
