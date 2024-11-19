@@ -14,7 +14,7 @@ class Elvira:
         await self.api_client.close()
 
     async def get_station_list(self):
-        return await self.api_instance.get_station_list(content_length="0")
+        return await self.api_instance.get_station_list()
 
     async def get_timetable(
         self,

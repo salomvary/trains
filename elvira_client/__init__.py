@@ -35,6 +35,7 @@ from elvira_client.models.havarian_infok import HavarianInfok
 from elvira_client.models.kind import Kind
 from elvira_client.models.modality import Modality
 from elvira_client.models.modality_sign import ModalitySign
+from elvira_client.models.relation_symbol import RelationSymbol
 from elvira_client.models.scheduler import Scheduler
 from elvira_client.models.service import Service
 from elvira_client.models.sign import Sign
@@ -44,4 +45,3 @@ from elvira_client.models.station_scheduler_details import StationSchedulerDetai
 from elvira_client.models.timetable_request import TimetableRequest
 from elvira_client.models.timetable_response import TimetableResponse
 from elvira_client.models.viszonylat_object import ViszonylatObject
-from elvira_client.models.viszonylati_jel import ViszonylatiJel

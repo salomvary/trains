@@ -17,27 +17,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from elvira_client.models.sign import Sign
-from elvira_client.models.station import Station
+from elvira_client.models.sign1 import Sign1
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Kind(BaseModel):
+class RelationSymbol(BaseModel):
     """
-    Kind
+    Relation symbol
     """ # noqa: E501
-    name: StrictStr = Field(description="Name of the train kind")
-    sort_name: Optional[StrictStr] = Field(alias="sortName")
-    code: StrictStr
-    priority: StrictInt
-    background_color_code: StrictStr = Field(alias="backgroundColorCode")
-    foreground_color_code: StrictStr = Field(alias="foregroundColorCode")
-    sign: Sign
-    start_station: Station = Field(alias="startStation")
-    end_station: Station = Field(alias="endStation")
-    __properties: ClassVar[List[str]] = ["name", "sortName", "code", "priority", "backgroundColorCode", "foregroundColorCode", "sign", "startStation", "endStation"]
+    piktogram_full_name: Optional[StrictStr] = Field(alias="piktogramFullName")
+    font_szin_kod: StrictStr = Field(alias="fontSzinKod")
+    hatter_szin_kod: StrictStr = Field(alias="hatterSzinKod")
+    sign: Sign1
+    jel: StrictStr = Field(description="Textual relation symbol")
+    __properties: ClassVar[List[str]] = ["piktogramFullName", "fontSzinKod", "hatterSzinKod", "sign", "jel"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -57,7 +52,7 @@ class Kind(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Kind from a JSON string"""
+        """Create an instance of RelationSymbol from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -81,22 +76,16 @@ class Kind(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of sign
         if self.sign:
             _dict['sign'] = self.sign.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of start_station
-        if self.start_station:
-            _dict['startStation'] = self.start_station.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of end_station
-        if self.end_station:
-            _dict['endStation'] = self.end_station.to_dict()
-        # set to None if sort_name (nullable) is None
+        # set to None if piktogram_full_name (nullable) is None
         # and model_fields_set contains the field
-        if self.sort_name is None and "sort_name" in self.model_fields_set:
-            _dict['sortName'] = None
+        if self.piktogram_full_name is None and "piktogram_full_name" in self.model_fields_set:
+            _dict['piktogramFullName'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Kind from a dict"""
+        """Create an instance of RelationSymbol from a dict"""
         if obj is None:
             return None
 
@@ -104,15 +93,11 @@ class Kind(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "sortName": obj.get("sortName"),
-            "code": obj.get("code"),
-            "priority": obj.get("priority"),
-            "backgroundColorCode": obj.get("backgroundColorCode"),
-            "foregroundColorCode": obj.get("foregroundColorCode"),
-            "sign": Sign.from_dict(obj["sign"]) if obj.get("sign") is not None else None,
-            "startStation": Station.from_dict(obj["startStation"]) if obj.get("startStation") is not None else None,
-            "endStation": Station.from_dict(obj["endStation"]) if obj.get("endStation") is not None else None
+            "piktogramFullName": obj.get("piktogramFullName"),
+            "fontSzinKod": obj.get("fontSzinKod"),
+            "hatterSzinKod": obj.get("hatterSzinKod"),
+            "sign": Sign1.from_dict(obj["sign"]) if obj.get("sign") is not None else None,
+            "jel": obj.get("jel")
         })
         return _obj
 

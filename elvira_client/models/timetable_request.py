@@ -27,7 +27,7 @@ class TimetableRequest(BaseModel):
     TimetableRequest
     """ # noqa: E501
     type: StrictStr
-    travel_date: StrictStr = Field(description="Might be up to 8 days in the past or several months in the future", alias="travelDate")
+    travel_date: StrictStr = Field(description="Specify day and time to return timetable after, might be up to 8 days in the past or several months in the future", alias="travelDate")
     station_number_code: StrictStr = Field(description="Numeric station code, returned as `code` by the `GetStationList` operation", alias="stationNumberCode")
     min_count: StrictStr = Field(alias="minCount")
     max_count: StrictStr = Field(alias="maxCount")

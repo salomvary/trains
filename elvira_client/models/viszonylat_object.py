@@ -25,13 +25,13 @@ from typing_extensions import Self
 
 class ViszonylatObject(BaseModel):
     """
-    ViszonylatObject
+    Relation
     """ # noqa: E501
     start_station_code: StrictStr = Field(alias="startStationCode")
-    start_time: datetime = Field(alias="startTime")
+    start_time: datetime = Field(description="Scheduled departure time at the departure station", alias="startTime")
     start_time_zone: StrictStr = Field(alias="startTimeZone")
     end_station_code: StrictStr = Field(alias="endStationCode")
-    end_time: datetime = Field(alias="endTime")
+    end_time: datetime = Field(description="Scheduled arrival time at the arrival station", alias="endTime")
     end_time_zone: StrictStr = Field(alias="endTimeZone")
     travel_time: Union[StrictFloat, StrictInt] = Field(alias="travelTime")
     start_track: Optional[StrictStr] = Field(alias="startTrack")

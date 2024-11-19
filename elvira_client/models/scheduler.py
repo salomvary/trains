@@ -20,13 +20,14 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing_extensions import Annotated
 from elvira_client.models.havarian_infok import HavarianInfok
 from elvira_client.models.kind import Kind
 from elvira_client.models.modality import Modality
+from elvira_client.models.relation_symbol import RelationSymbol
 from elvira_client.models.service import Service
 from elvira_client.models.station import Station
 from elvira_client.models.viszonylat_object import ViszonylatObject
-from elvira_client.models.viszonylati_jel import ViszonylatiJel
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -35,9 +36,9 @@ class Scheduler(BaseModel):
     Scheduler
     """ # noqa: E501
     aggregated_service_ids: List[Optional[StrictStr]] = Field(alias="aggregatedServiceIds")
-    name: Optional[StrictStr]
+    name: Optional[StrictStr] = Field(description="Name of the train, present for some international trains")
     seat_reservation_code: StrictStr = Field(alias="seatReservationCode")
-    code: StrictStr
+    code: Annotated[str, Field(min_length=2, strict=True, max_length=5)] = Field(description="Train number")
     company_code: Optional[StrictStr] = Field(alias="companyCode")
     route: Optional[StrictStr]
     start_station_reservation_code: Optional[StrictStr] = Field(alias="startStationReservationCode")
@@ -47,9 +48,9 @@ class Scheduler(BaseModel):
     start_date: datetime = Field(alias="startDate")
     orig_start_station: Optional[StrictStr] = Field(alias="origStartStation")
     orig_end_station: Optional[StrictStr] = Field(alias="origEndStation")
-    start: Optional[datetime]
+    start: Optional[datetime] = Field(description="Scheduled departure time at the current station")
     virtual_start: StrictBool = Field(alias="virtualStart")
-    arrive: Optional[datetime]
+    arrive: Optional[datetime] = Field(description="Scheduled arrival time at the current station")
     modality: Modality
     virtual_arrive: StrictBool = Field(alias="virtualArrive")
     distance: Union[StrictFloat, StrictInt]
@@ -59,8 +60,8 @@ class Scheduler(BaseModel):
     kinds_to_display: List[Kind] = Field(alias="kindsToDisplay")
     kind: Kind
     services: List[Service]
-    actual_or_estimated_start: Optional[StrictStr] = Field(alias="actualOrEstimatedStart")
-    actual_or_estimated_arrive: Optional[StrictStr] = Field(alias="actualOrEstimatedArrive")
+    actual_or_estimated_start: Optional[StrictStr] = Field(description="Actual or estimated departure time at the current station, including delays", alias="actualOrEstimatedStart")
+    actual_or_estimated_arrive: Optional[StrictStr] = Field(description="Actual or estimated arrival time at the current station, including delays", alias="actualOrEstimatedArrive")
     havarian_infok: HavarianInfok = Field(alias="havarianInfok")
     direct_trains: Optional[StrictStr] = Field(alias="directTrains")
     carrier_trains: Optional[StrictStr] = Field(alias="carrierTrains")
@@ -72,13 +73,13 @@ class Scheduler(BaseModel):
     full_type: Optional[StrictStr] = Field(alias="fullType")
     full_short_type: StrictStr = Field(alias="fullShortType")
     footer: Optional[StrictStr]
-    viszonylati_jel: Optional[ViszonylatiJel] = Field(alias="viszonylatiJel")
+    viszonylati_jel: Optional[RelationSymbol] = Field(alias="viszonylatiJel")
     viszonylat_object: ViszonylatObject = Field(alias="viszonylatObject")
     description: Optional[StrictStr]
     same_car: StrictBool = Field(alias="sameCar")
     start_time_zone: Optional[StrictStr] = Field(alias="startTimeZone")
     arrive_time_zone: Optional[StrictStr] = Field(alias="arriveTimeZone")
-    train_id: StrictStr = Field(alias="trainId")
+    train_id: StrictStr = Field(description="Unique identifier the train within a day", alias="trainId")
     __properties: ClassVar[List[str]] = ["aggregatedServiceIds", "name", "seatReservationCode", "code", "companyCode", "route", "startStationReservationCode", "endStationReservationCode", "startStation", "endStation", "startDate", "origStartStation", "origEndStation", "start", "virtualStart", "arrive", "modality", "virtualArrive", "distance", "closedTrackWay", "fullName", "kinds", "kindsToDisplay", "kind", "services", "actualOrEstimatedStart", "actualOrEstimatedArrive", "havarianInfok", "directTrains", "carrierTrains", "startTrack", "startTrackType", "endTrack", "endTrackType", "jeEszkozAlapId", "fullType", "fullShortType", "footer", "viszonylatiJel", "viszonylatObject", "description", "sameCar", "startTimeZone", "arriveTimeZone", "trainId"]
 
     model_config = ConfigDict(
@@ -327,7 +328,7 @@ class Scheduler(BaseModel):
             "fullType": obj.get("fullType"),
             "fullShortType": obj.get("fullShortType"),
             "footer": obj.get("footer"),
-            "viszonylatiJel": ViszonylatiJel.from_dict(obj["viszonylatiJel"]) if obj.get("viszonylatiJel") is not None else None,
+            "viszonylatiJel": RelationSymbol.from_dict(obj["viszonylatiJel"]) if obj.get("viszonylatiJel") is not None else None,
             "viszonylatObject": ViszonylatObject.from_dict(obj["viszonylatObject"]) if obj.get("viszonylatObject") is not None else None,
             "description": obj.get("description"),
             "sameCar": obj.get("sameCar"),
