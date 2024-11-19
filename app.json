@@ -1,0 +1,8 @@
+{
+  "cron": [
+    {
+      "command": "./manage.py fetch_timetables --station-codes 005510470 005510454",
+      "schedule": "*/5 * * * *"
+    }
+  ]
+}
