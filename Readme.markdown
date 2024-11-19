@@ -15,8 +15,8 @@ Various tools and unofficial API clients and tools for MÁV - Hungarian Railways
 The generated clients are based on reverse engineering the APIs and manually creating OpenAPI
 specifications. See the `openapi.json` files in the respective directories.
 
-- [Open Vonatinfó API in Swagger Editor](https://editor-next.swagger.io/?url=https://raw.githubusercontent.com/salomvary/trains/refs/heads/main/vonatinfo_spec/openapi.json) 
-- [Open ELVIRA API in Swagger Editor](https://editor-next.swagger.io/?url=https://raw.githubusercontent.com/salomvary/trains/refs/heads/main/elvira_spec/openapi.json) 
+- [Open Vonatinfó API in Swagger Editor](https://editor-next.swagger.io/?url=https://raw.githubusercontent.com/salomvary/trains/refs/heads/main/vonatinfo_spec/openapi.json)
+- [Open ELVIRA API in Swagger Editor](https://editor-next.swagger.io/?url=https://raw.githubusercontent.com/salomvary/trains/refs/heads/main/elvira_spec/openapi.json)
 
 ## Usage
 
@@ -35,3 +35,11 @@ Use the CLIs: see Readme files in `vonatinfo_cli` and `elvira_cli` directories.
     brew install openapi-generator
     make vonatinfo-client
     make elvira-client
+
+## Deploying to Dokku
+
+    dokku apps:create trains
+    dokku postgres:create trains
+    dokku postgres:link trains trains
+    dokku config:set DEBUG=False ALLOWED_HOSTS=trains.example.com
+    dokku config:set DISABLE_COLLECTSTATIC=1
