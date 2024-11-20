@@ -4,11 +4,24 @@ import elvira_client
 from elvira_client import TimetableRequest
 from . import ignore_invalid_elvira_cookie
 
+REQUEST_TIMEOUT_SECONDS = 10
+
 
 class Elvira:
     async def __aenter__(self):
         self.api_client = elvira_client.ApiClient()
         self.api_instance = elvira_client.DefaultApi(self.api_client)
+
+        # Because we can not override the default timeout in a clean way,
+        # and do not want each api client call to have
+        # a _request_timeout parameter (esp. not mock assertions),
+        # we will monkey patch here.
+        _request = self.api_client.rest_client.request
+
+        def request(*args, _request_timeout=None, **kwargs):
+            return _request(*args, _request_timeout=REQUEST_TIMEOUT_SECONDS, **kwargs)
+
+        self.api_client.rest_client.request = request
         return self
 
     async def __aexit__(self, exc_type, exc_value, traceback):
