@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 
 import elvira_client
 from elvira_client import TimetableRequest
+from . import ignore_invalid_elvira_cookie
 
 
 class Elvira:
