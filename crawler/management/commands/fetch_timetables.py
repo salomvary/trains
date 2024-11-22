@@ -1,5 +1,6 @@
 import asyncio
 import itertools
+import logging
 from datetime import datetime, timezone, timedelta
 
 from django.core.management import BaseCommand
@@ -7,6 +8,8 @@ from django.core.management import BaseCommand
 import elvira_api
 from crawler.models import Schedule
 from elvira_client import Scheduler, Station
+
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -16,20 +19,36 @@ class Command(BaseCommand):
         parser.add_argument("--station-codes", nargs="+", type=str, default=[])
 
     def handle(self, *args, **options):
+        if not options["station_codes"]:
+            logger.error("No station codes provided")
+            exit(1)
+
         asyncio.run(fetch_timetables(options["station_codes"]))
 
 
 async def fetch_timetables(station_codes: list[str]):
     travel_date = datetime.now(timezone.utc) - timedelta(days=1)
+    logger.info("Fetching timetables for %s", travel_date)
     async with elvira_api.Elvira() as elvira:
         for station_code in station_codes:
-            await fetch_timetable(elvira, station_code, travel_date=travel_date)
+            schedules = await fetch_timetable(
+                elvira, station_code, travel_date=travel_date
+            )
+            schedules_count = len(schedules)
+            if schedules_count > 0:
+                logger.info(
+                    "Fetched %s schedules for station %s",
+                    schedules_count,
+                    station_code,
+                )
+            else:
+                logger.error("No schedules fetched for station %s", station_code)
 
 
 async def fetch_timetable(elvira, station_code: str, travel_date: datetime):
     timetable = await elvira.get_timetable(station_code, travel_date=travel_date)
 
-    await Schedule.objects.abulk_create(
+    return await Schedule.objects.abulk_create(
         itertools.chain(
             (
                 map_schedule(Schedule.ScheduleType.ARRIVAL, timetable.station, schedule)
