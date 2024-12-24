@@ -25,4 +25,14 @@ class Schedule(models.Model):
     relation_symbol = models.CharField(max_length=50, null=True)
     kind_name = models.CharField(max_length=50, null=True)
 
+    # Start station
+    start_station_name = models.CharField(max_length=100)
+    start_station_code = models.CharField(max_length=50)
+    start_station_id = models.PositiveIntegerField()
+
+    # End station
+    end_station_name = models.CharField(max_length=100)
+    end_station_code = models.CharField(max_length=50)
+    end_station_id = models.PositiveIntegerField()
+
     created_at = models.DateTimeField(auto_now_add=True)

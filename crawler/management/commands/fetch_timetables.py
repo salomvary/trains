@@ -85,4 +85,12 @@ def map_schedule(
             schedule.viszonylati_jel.jel if schedule.viszonylati_jel else None
         ),
         kind_name=schedule.kind.name,
+        # Start station
+        start_station_name=schedule.start_station.name,
+        start_station_code=schedule.start_station.code,
+        start_station_id=schedule.start_station.id,
+        # End station
+        end_station_name=schedule.end_station.name,
+        end_station_code=schedule.end_station.code,
+        end_station_id=schedule.end_station.id,
     )
