@@ -381,7 +381,8 @@
           },
           "travelDate": {
             "type": "string",
-            "description": "Specify day and time to return timetable after, might be up to 8 days in the past or several months in the future",
+            "description": "Specify day and time to return timetable after, might be up to 8 days in the past or several months in the future. Also accepts bare dates with no time or timezone.",
+            "format": "date-time",
             "example": "2024-11-19T00:00:00.000Z"
           },
           "stationNumberCode": {
